@@ -1,4 +1,10 @@
 
+export interface TableHead {
+  name: string
+  value: string
+  width?: string
+  sortable?: boolean
+}
 export interface Post {
   userId: number
   id: number
@@ -9,5 +15,5 @@ export interface Post {
 export interface PostsQuery {
   _start: string
   _limit: string
-  _searchQuery?: string
+  _searchQuery: string
 }
