@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {TableHead} from "~/composables/Posts/types";
+import SortIcon from "~/components/icons/SortIcon.vue";
 
 const props = defineProps<{
   tableHeaders: TableHead[]
@@ -18,9 +19,11 @@ const sortField = ref("")
 const sortedList = computed<any[]>(() => {
   if (!sortField.value) return props.tableList
   return props.tableList.sort((a, b) => {
-    return sort.value === "asc"
+    const sortFunction = Number.isNaN(Number(a[sortField.value]))
         ? a[sortField.value].toString().localeCompare(b[sortField.value].toString())
-        : -1 * a[sortField.value].toString().localeCompare(b[sortField.value].toString())
+        : a[sortField.value] - b[sortField.value]
+
+    return sort.value === "asc" ? sortFunction : -1 * sortFunction
   })
 });
 
@@ -39,14 +42,15 @@ const sortHandler = (head: TableHead) => {
   <table :class="{'loading': props.loading}">
     <thead>
       <tr>
-        <th v-for="header in tableHeaders" :width="header?.width" @click="sortHandler(header)">
+        <th
+          v-for="header in tableHeaders"
+          :width="header?.width"
+          :key="header.value"
+          @click="sortHandler(header)"
+        >
           <span> {{header.name}} </span>
           <span v-if="header.sortable" class="sorting-icon">
-            <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-              <g>
-                <path d="M15.71 8.293l3 3c.63.63.183 1.707-.708 1.707h-6c-.89 0-1.337-1.077-.707-1.707l3-3a1 1 0 011.414 0zm0 13.414l3-3c.63-.63.183-1.707-.708-1.707h-6c-.89 0-1.337 1.077-.707 1.707l3 3a1 1 0 001.414 0z"></path>
-              </g>
-            </svg>
+            <sort-icon/>
           </span>
         </th>
       </tr>
@@ -54,10 +58,10 @@ const sortHandler = (head: TableHead) => {
 
     <tbody>
       <tr
-          v-if="tableList.length"
-          v-for="item in sortedList"
-          :key="item"
-          @click="rowClickHandler({...item})"
+        v-if="tableList.length"
+        v-for="item in sortedList"
+        :key="item"
+        @click="rowClickHandler({...item})"
       >
         <td v-for="header in tableHeaders">
           <span class="cell-text" v-html="item[header.value]" />
@@ -130,7 +134,7 @@ table {
       font-size: 0;
       svg {
         width: 20px;
-        path {
+        :deep(path) {
           fill: var(--seconday-color);
         }
       }
@@ -141,8 +145,12 @@ table {
     padding: 1rem;
     border-right: 1px solid var(--accent-border);
   }
+
   .cell-text {
     transition: all .4s;
+  }
+  .empty-text {
+    font: var(--heading-font);
   }
   &.loading {
     pointer-events: none;
@@ -152,5 +160,6 @@ table {
       filter: blur(0.5rem);
     }
   }
+
 }
 </style>

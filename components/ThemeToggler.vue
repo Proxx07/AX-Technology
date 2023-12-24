@@ -30,8 +30,8 @@ useHead({
   cursor: pointer;
   border: 1px solid var(--accent-color);
   border-radius: .5rem;
-  bottom: 3rem;
-  left: 3rem;
+  top: 1.5rem;
+  right: 3rem;
 
   z-index: 100;
 }

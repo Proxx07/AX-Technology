@@ -1,6 +1,6 @@
-import {$fetch} from "ofetch";
+import {$fetch, $Fetch} from "ofetch";
 
-const $request = $fetch.create({
+const $request: $Fetch = $fetch.create({
   baseURL: "https://jsonplaceholder.typicode.com"
 });
 

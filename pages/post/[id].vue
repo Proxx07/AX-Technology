@@ -26,12 +26,12 @@ await getPostComments();
         class="post-item"
       />
       <comments
-          v-model:searchQuery="query._searchQuery"
-          comment-title="Комментарии"
-          class="comments-item"
-          :loadMoreEnabled="loadMoreEnabled"
-          :comments-list="searchedCommentsList"
-          @update-list="getPostComments"
+        v-model:searchQuery="query._searchQuery"
+        comment-title="Комментарии"
+        class="comments-item"
+        :loadMoreEnabled="loadMoreEnabled"
+        :comments-list="searchedCommentsList"
+        @update-list="getPostComments"
       />
     </div>
   </div>

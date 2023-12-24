@@ -10,15 +10,8 @@ await getPosts()
   <div class="page-wrapper">
     <div class="page-wrapper__top">
       <h1> Список постов </h1>
-
       <v-input v-model="query._searchQuery" placeholder="Поиск..."/>
-
-      <v-select
-        v-model="query._limit"
-        label="Per page"
-        :items="perPageObject"
-        @change="updatePage"
-      />
+      <div></div>
     </div>
 
     <div class="table-wrapper styled-scroll">
@@ -37,6 +30,16 @@ await getPosts()
         :disabled="isLoading"
         @page-change="updatePage"
       />
+
+      <div>
+        <v-select
+          v-model="query._limit"
+          label="Per page"
+          class="per-page"
+          :items="perPageObject"
+          @change="updatePage"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +58,20 @@ await getPosts()
     grid-template-columns: 1fr 2fr 1fr;
   }
 
+  &__bottom {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    .pagination {
+      justify-content: flex-end;
+    }
+
+    .per-page {
+      max-width: 50%;
+      margin-left: auto;
+      height: 100%;
+    }
+  }
 }
 
 .table-wrapper {

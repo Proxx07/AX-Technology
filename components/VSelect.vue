@@ -23,7 +23,7 @@ const changeHandler = (e: Event) => {
     <select @change="changeHandler">
       <option
         v-for="item in items"
-        :value="value ? item[value] : item"
+        :value="value ? item[value] : typeof item === 'object' ? JSON.stringify(item) : item"
         :key="item"
       >
         {{name ? item[name] : item}}
