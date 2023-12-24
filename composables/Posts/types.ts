@@ -12,7 +12,7 @@ export interface Post {
   body: string
 }
 
-export interface PostsQuery {
+export interface ListsQuery {
   _start: string
   _limit: string
   _searchQuery: string

@@ -61,12 +61,12 @@ watch(() => props.totalPages,
 
 <template>
   <div class="pagination" v-if="totalPages">
-    <button class="prev" :disabled="activePage == 1 || disabled" @click="changePage(+activePage - 1)">
+    <v-button :disabled="activePage == 1 || disabled" @click="changePage(+activePage - 1)">
       {{ "<" }}
-    </button>
+    </v-button>
 
     <template v-for="page in renderingPages">
-      <button
+      <v-button
         v-if="Number.isInteger(page)"
         :class="{active: page == activePage}"
         :disabled="page == activePage || disabled"
@@ -74,13 +74,13 @@ watch(() => props.totalPages,
         @click="changePage(+page)"
       >
         {{ page }}
-      </button>
+      </v-button>
       <span v-else class="separator"> {{ page }} </span>
     </template>
 
-    <button class="next" :disabled="activePage == totalPages || disabled" @click="changePage(+activePage + 1)">
+    <v-button :disabled="activePage == totalPages || disabled" @click="changePage(+activePage + 1)">
       {{ ">" }}
-    </button>
+    </v-button>
   </div>
 </template>
 
@@ -93,30 +93,10 @@ watch(() => props.totalPages,
   flex-wrap: wrap;
 
   button {
-    --color: var(--accent-color);
-    --bg: var(--accent-bg);
-
-    cursor: pointer;
     padding: .8rem 1.3rem;
     border-radius: 5rem;
     text-align: center;
     min-width: 5rem;
-    transition: all 0.3s;
-    font: var(--note-font);
-    color: var(--color);
-    background-color: var(--bg);
-    border: 1px solid var(--color);
-
-    &:hover,
-    &.active {
-      --color: var(--seconday-color);
-      --bg: var(--seconday-bg);
-      border-color: var(--bg);
-    }
-
-    &[disabled] {
-      pointer-events: none;
-    }
   }
 
   .separator {

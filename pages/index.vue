@@ -2,7 +2,7 @@
 import {usePosts} from "~/composables/Posts";
 import {postsTableHeader, perPageObject} from "~/staticContent/Posts";
 
-const {searchedPosts, totalPages, isLoading, query, getPosts, updatePage} = usePosts()
+const {searchedPosts, totalPages, isLoading, query, getPosts, updatePage, rowClickHandler} = usePosts()
 await getPosts()
 </script>
 
@@ -21,11 +21,12 @@ await getPosts()
       />
     </div>
 
-    <div class="table-wrapper">
+    <div class="table-wrapper styled-scroll">
       <v-table
         :table-headers="postsTableHeader"
         :table-list="searchedPosts"
         :loading="isLoading"
+        @row-clicked="rowClickHandler"
       />
     </div>
 
@@ -41,10 +42,6 @@ await getPosts()
 </template>
 
 <style lang="scss" scoped>
-h1 {
-  font: var(--heading-font);
-}
-
 .page-wrapper {
   display: flex;
   flex-direction: column;
@@ -66,18 +63,5 @@ h1 {
   overflow: auto;
   max-height: 80vh;
   min-height: 80vh;
-
-  &::-webkit-scrollbar-track {
-    visibility: hidden;
-  }
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    background-color: var(--accent-color);
-  }
 }
 </style>

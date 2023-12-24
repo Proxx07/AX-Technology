@@ -8,7 +8,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
-
 const inputHandler = ($event: Event) => {
   emit('update:modelValue', ($event.target as HTMLInputElement).value)
 }

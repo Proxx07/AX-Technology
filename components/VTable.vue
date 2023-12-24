@@ -57,7 +57,7 @@ const sortHandler = (head: TableHead) => {
           v-if="tableList.length"
           v-for="item in sortedList"
           :key="item"
-          @click="rowClickHandler(item)"
+          @click="rowClickHandler({...item})"
       >
         <td v-for="header in tableHeaders">
           <span class="cell-text" v-html="item[header.value]" />
