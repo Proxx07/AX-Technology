@@ -85,7 +85,9 @@ table {
     text-align: left;
     border: 1px solid var(--accent-border);
     position: sticky;
-    top: 0;
+    top: -1px;
+    z-index: 100;
+    transition: all .4s;
   }
 
   tbody {
@@ -93,14 +95,26 @@ table {
     background: var(--accent-bg);
     border: 1px solid var(--accent-border);
     border-radius: 0 0 .4rem .4rem;
+    transition: all .4s;
   }
 
   tr {
     border-bottom: 1px solid var(--accent-border);
     cursor: pointer;
-    transition: all .3s;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background: var(--seconday-bg);
+      transition: all .4s;
+    }
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      &:before {
+        opacity: 0.1;
+      }
     }
   }
 
@@ -126,11 +140,10 @@ table {
   td {
     padding: 1rem;
     border-right: 1px solid var(--accent-border);
-    .cell-text {
-      transition: all .4s;
-    }
   }
-
+  .cell-text {
+    transition: all .4s;
+  }
   &.loading {
     pointer-events: none;
     user-select: none;

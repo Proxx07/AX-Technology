@@ -27,7 +27,7 @@ html {
 body {
   background: var(--accent-bg);
   color: var(--accent-color);
-
+  transition: all .4s;
   &.light {
     --seconday-bg: #1c1c1d;
     --seconday-color: #fff;

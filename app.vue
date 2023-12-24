@@ -1,6 +1,10 @@
 <template>
   <div class="site-wrapper">
     <NuxtPage/>
+
+    <client-only>
+      <theme-toggler/>
+    </client-only>
   </div>
 </template>
 
@@ -9,3 +13,5 @@
   min-height: 100vh;
 }
 </style>
+<script setup lang="ts">
+</script>
